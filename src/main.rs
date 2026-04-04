@@ -4,10 +4,9 @@ mod toolbar;
 mod tools;
 
 use std::cell::RefCell;
-use std::fs::File;
 use std::rc::Rc;
 
-use cairo::ImageSurface;
+use cairo::{Format, ImageSurface};
 use gtk4::prelude::*;
 use gtk4::{
     Application, ApplicationWindow, Box as GtkBox, EventControllerKey, Orientation, ScrolledWindow,
@@ -40,12 +39,28 @@ fn main() {
         .build();
 
     app.connect_activate(move |app| {
-        let mut file = File::open(&image_path).expect("Cannot open image file");
-        let background =
-            ImageSurface::create_from_png(&mut file).expect("Cannot parse PNG image");
+        let img = image::open(&image_path)
+            .expect("Cannot open image file")
+            .to_rgba8();
+        let img_w = img.width() as i32;
+        let img_h = img.height() as i32;
 
-        let img_w = background.width();
-        let img_h = background.height();
+        let mut background = ImageSurface::create(Format::ARgb32, img_w, img_h).unwrap();
+        {
+            let cairo_stride = background.stride() as usize;
+            let mut data = background.data().unwrap();
+            for y in 0..img_h as usize {
+                for x in 0..img_w as usize {
+                    let px = img.get_pixel(x as u32, y as u32).0;
+                    let dst_off = y * cairo_stride + x * 4;
+                    // Cairo ARGB32: B, G, R, A on little-endian
+                    data[dst_off] = px[2];
+                    data[dst_off + 1] = px[1];
+                    data[dst_off + 2] = px[0];
+                    data[dst_off + 3] = px[3];
+                }
+            }
+        }
 
         let state = Rc::new(RefCell::new(AppState {
             background,

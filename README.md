@@ -6,6 +6,8 @@ Take a region screenshot, annotate it with shapes and text, then copy or save â€
 
 Built with Rust + GTK4 + Cairo.
 
+![hyprsnap](screenshot.png)
+
 ## Features
 
 **Annotation editor** (Super+Shift+S)
@@ -60,9 +62,9 @@ Reload your config:
 hyprctl reload
 ```
 
-## Credits
+## Disclaimer
 
-Vibe coded with [Claude](https://claude.ai).
+This is a bit hacky in some ways â€” it was vibe coded with [Claude](https://claude.ai) and gets the job done, but don't expect polish.
 
 ## Uninstall
 
