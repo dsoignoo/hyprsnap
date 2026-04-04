@@ -46,10 +46,10 @@ Then add to your Hyprland config (`~/.config/hypr/hyprland.conf`):
 
 ```
 # Screenshot editor
-bind = $mod SHIFT, S, exec, screenshot-edit
+bind = $mod SHIFT, S, exec, ~/.local/bin/screenshot-edit
 
 # OCR select
-bind = $mod SHIFT, O, exec, ocr-select
+bind = $mod SHIFT, O, exec, ~/.local/bin/ocr-select
 ```
 
 Reload your config:

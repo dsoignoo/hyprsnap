@@ -31,10 +31,10 @@ install: deps build
 	@echo "Add the following to your Hyprland config ($(HYPRCONF)):"
 	@echo ""
 	@echo "  # Screenshots (region select -> annotation editor)"
-	@echo "  bind = \$$mod SHIFT, S, exec, screenshot-edit"
+	@echo "  bind = \$$mod SHIFT, S, exec, ~/.local/bin/screenshot-edit"
 	@echo ""
 	@echo "  # OCR (select region -> text to clipboard)"
-	@echo "  bind = \$$mod SHIFT, O, exec, ocr-select"
+	@echo "  bind = \$$mod SHIFT, O, exec, ~/.local/bin/ocr-select"
 	@echo ""
 	@echo "Then reload: hyprctl reload"
 
