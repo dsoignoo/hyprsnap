@@ -54,6 +54,13 @@ bind = $mod SHIFT, S, exec, ~/.local/bin/screenshot-edit
 
 # OCR select
 bind = $mod SHIFT, O, exec, ~/.local/bin/ocr-select
+
+# Float the editor window instead of tiling
+windowrule {
+    match:title = ^Screenshot Editor$
+    float = true
+    center = true
+}
 ```
 
 Reload your config:
