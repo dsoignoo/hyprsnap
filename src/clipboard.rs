@@ -87,7 +87,7 @@ pub fn ocr_region(state: &AppState, start: (f64, f64), end: (f64, f64)) {
     drop(cr);
 
     // Write cropped region to temp file
-    let tmp_path = "/tmp/screenshottool_ocr_region.png";
+    let tmp_path = "/tmp/hyprsnap_ocr_region.png";
     let mut file = std::fs::File::create(tmp_path).unwrap();
     crop.write_to_png(&mut file).unwrap();
     drop(file);

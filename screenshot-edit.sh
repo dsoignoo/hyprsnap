@@ -12,4 +12,4 @@ hyprshot -m region -o "$SCREENSHOT_DIR" -f "$SCREENSHOT_FILE" -s
 [ -f "$SCREENSHOT_PATH" ] || exit 0
 
 # Launch the annotation editor
-screenshottool "$SCREENSHOT_PATH"
+hyprsnap "$SCREENSHOT_PATH"

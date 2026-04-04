@@ -21,7 +21,7 @@ build:
 
 install: deps build
 	mkdir -p $(BINDIR)
-	cp target/release/screenshottool $(BINDIR)/screenshottool
+	cp target/release/hyprsnap $(BINDIR)/hyprsnap
 	cp screenshot-edit.sh $(BINDIR)/screenshot-edit
 	cp ocr-select.sh $(BINDIR)/ocr-select
 	chmod +x $(BINDIR)/screenshot-edit $(BINDIR)/ocr-select
@@ -39,7 +39,7 @@ install: deps build
 	@echo "Then reload: hyprctl reload"
 
 uninstall:
-	rm -f $(BINDIR)/screenshottool
+	rm -f $(BINDIR)/hyprsnap
 	rm -f $(BINDIR)/screenshot-edit
 	rm -f $(BINDIR)/ocr-select
 	@echo "Removed binaries. Clean up keybindings in $(HYPRCONF) manually."

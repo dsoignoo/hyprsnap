@@ -1,6 +1,8 @@
-# screenshottool
+# hyprsnap
 
-A lightweight screenshot annotation editor and OCR tool for Hyprland. Take a region screenshot, annotate it with shapes and text, then copy or save — all from a single keybinding. Also includes a standalone OCR mode that extracts text from any screen region directly to your clipboard.
+Powerful and simple screenshot software for Hyprland.
+
+Take a region screenshot, annotate it with shapes and text, then copy or save — all from a single keybinding. Also includes a standalone OCR mode that extracts text from any screen region directly to your clipboard.
 
 Built with Rust + GTK4 + Cairo.
 
@@ -32,15 +34,15 @@ Built with Rust + GTK4 + Cairo.
 ## Install
 
 ```bash
-git clone https://github.com/dsoignoo/screenshottool.git
-cd screenshottool
+git clone https://github.com/dsoignoo/hyprsnap.git
+cd hyprsnap
 make install
 ```
 
 This will:
 1. Install system dependencies (supports `pacman` and `zypper`)
 2. Build the Rust binary
-3. Install `screenshottool`, `screenshot-edit`, and `ocr-select` to `~/.local/bin`
+3. Install `hyprsnap`, `screenshot-edit`, and `ocr-select` to `~/.local/bin`
 
 Then add to your Hyprland config (`~/.config/hypr/hyprland.conf`):
 
