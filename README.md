@@ -6,6 +6,8 @@ Take a region screenshot, annotate it with shapes and text, then copy or save â€
 
 Built with Rust + GTK4 + Cairo.
 
+![hyprsnap](demo.gif)
+
 ![hyprsnap](screenshot.png)
 
 ## Features
