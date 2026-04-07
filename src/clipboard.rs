@@ -29,7 +29,10 @@ pub fn save_to_file(state: &AppState, _window: &gtk4::ApplicationWindow) {
 
     let path = Path::new(&state.image_path);
     let stem = path.file_stem().unwrap_or_default().to_string_lossy();
-    let parent = path.parent().unwrap_or(Path::new("/tmp"));
+    let parent = match &state.save_dir {
+        Some(dir) => Path::new(dir).to_path_buf(),
+        None => path.parent().unwrap_or(Path::new("/tmp")).to_path_buf(),
+    };
     let out_path = parent.join(format!("{stem}_annotated.png"));
 
     let mut file = std::fs::File::create(&out_path).unwrap();

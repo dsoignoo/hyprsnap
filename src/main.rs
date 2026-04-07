@@ -23,16 +23,38 @@ pub struct AppState {
     pub stroke_width: f64,
     pub font_size: f64,
     pub image_path: String,
+    pub save_dir: Option<String>,
     pub text_click_pos: Option<(f64, f64)>,
 }
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     if args.len() < 2 {
-        eprintln!("Usage: hyprsnap <image.png>");
+        eprintln!("Usage: hyprsnap [--save-dir <dir>] <image.png>");
         std::process::exit(1);
     }
-    let image_path = args[1].clone();
+
+    let mut image_path = String::new();
+    let mut save_dir: Option<String> = None;
+    let mut i = 1;
+    while i < args.len() {
+        if args[i] == "--save-dir" {
+            i += 1;
+            if i < args.len() {
+                save_dir = Some(args[i].clone());
+            } else {
+                eprintln!("--save-dir requires an argument");
+                std::process::exit(1);
+            }
+        } else {
+            image_path = args[i].clone();
+        }
+        i += 1;
+    }
+    if image_path.is_empty() {
+        eprintln!("Usage: hyprsnap [--save-dir <dir>] <image.png>");
+        std::process::exit(1);
+    }
 
     let app = Application::builder()
         .flags(gtk4::gio::ApplicationFlags::NON_UNIQUE)
@@ -71,6 +93,7 @@ fn main() {
             stroke_width: 3.0,
             font_size: 20.0,
             image_path: image_path.clone(),
+            save_dir: save_dir.clone(),
             text_click_pos: None,
         }));
 
