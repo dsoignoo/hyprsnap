@@ -142,6 +142,19 @@ fn main() {
                     _ => {}
                 }
             }
+            match key {
+                gtk4::gdk::Key::s => {
+                    clipboard::save_to_file(&state_key.borrow(), &win_key);
+                    win_key.close();
+                    return gtk4::glib::Propagation::Stop;
+                }
+                gtk4::gdk::Key::c => {
+                    clipboard::copy_to_clipboard(&state_key.borrow());
+                    win_key.close();
+                    return gtk4::glib::Propagation::Stop;
+                }
+                _ => {}
+            }
             gtk4::glib::Propagation::Proceed
         });
         window.add_controller(key_ctrl);

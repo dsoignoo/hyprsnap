@@ -17,8 +17,8 @@ Built with Rust + GTK4 + Cairo.
 - Adjustable stroke width and font size
 - Color picker (red, green, blue, yellow, white)
 - Undo with Ctrl+Z
-- Save annotated image (Ctrl+S)
-- Copy annotated image to clipboard (Ctrl+C)
+- Save annotated image (Ctrl+S) or press `s` to save and close
+- Copy annotated image to clipboard (Ctrl+C) or press `c` to copy and close
 
 **OCR mode** (Super+Shift+O)
 - Select any screen region, text is extracted via Tesseract and copied to clipboard
