@@ -11,7 +11,8 @@ Built with Rust + GTK4 + Cairo.
 ## Features
 
 **Annotation editor** (Super+Shift+S)
-- Region screenshot via [hyprshot](https://github.com/Gustash/Hyprshot), then opens the editor
+- Region screenshot via [hyprshot](https://github.com/Gustash/Hyprshot), shows a thumbnail preview
+- Preview appears in the bottom-right corner for 5 seconds — click to open the full editor, or let it auto-close
 - Draw rectangles, lines, and arrows (drag to draw)
 - Add text annotations (click to place, type, Enter to confirm)
 - Adjustable stroke width and font size
@@ -55,11 +56,16 @@ bind = $mod SHIFT, S, exec, ~/.local/bin/screenshot-edit
 # OCR select
 bind = $mod SHIFT, O, exec, ~/.local/bin/ocr-select
 
-# Float the editor window instead of tiling
+# Float the editor and preview windows
 windowrule {
     match:title = ^Screenshot Editor$
     float = true
     center = true
+}
+
+windowrule {
+    match:title = ^Screenshot Preview$
+    float = true
 }
 ```
 
@@ -86,6 +92,7 @@ By default, screenshots are saved next to the original temporary file. Adding `-
 
 | Option | Description |
 |---|---|
+| `--preview` | Start in preview mode (thumbnail, auto-close after 5s, click to edit) |
 | `--save-dir <dir>` | Directory where annotated screenshots are saved |
 
 > **Note:** `make install` will not overwrite your modified scripts — it prompts before replacing them.

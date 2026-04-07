@@ -20,5 +20,5 @@ while true; do
     sleep 0.05
 done
 
-# Launch the annotation editor
-"$HOME/.local/bin/hyprsnap" "$SCREENSHOT_PATH"
+# Launch the annotation editor (preview mode: small thumbnail, click to expand)
+"$HOME/.local/bin/hyprsnap" --preview "$SCREENSHOT_PATH"
