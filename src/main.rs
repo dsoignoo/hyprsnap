@@ -164,7 +164,14 @@ fn main() {
                 vbox.append(&scrolled);
                 win_click.set_child(Some(&vbox));
                 win_click.set_title(Some("Screenshot Editor"));
-                win_click.set_default_size(img_w.min(1600), (img_h + 50).min(900));
+                let new_w = img_w.min(1600);
+                let new_h = (img_h + 50).min(900);
+                win_click.set_default_size(new_w, new_h);
+
+                // Resize via hyprctl since set_default_size doesn't affect already-presented windows
+                let _ = std::process::Command::new("hyprctl")
+                    .args(["dispatch", &format!("resizeactive exact {} {}", new_w, new_h)])
+                    .spawn();
 
                 // Add keyboard shortcuts
                 let key_ctrl = EventControllerKey::new();

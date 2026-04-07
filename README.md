@@ -13,8 +13,9 @@ Built with Rust + GTK4 + Cairo.
 ## Features
 
 **Annotation editor** (Super+Shift+S)
-- Region screenshot via [hyprshot](https://github.com/Gustash/Hyprshot), shows a thumbnail preview
-- Preview appears in the bottom-right corner for 5 seconds — click to open the full editor, or let it auto-close
+- Region screenshot via [hyprshot](https://github.com/Gustash/Hyprshot)
+- With `--preview`: shows a thumbnail in the bottom-right corner for 5 seconds — click to open the full editor, or let it auto-close
+- Without `--preview`: opens the annotation editor directly
 - Draw rectangles, lines, and arrows (drag to draw)
 - Add text annotations (click to place, type, Enter to confirm)
 - Adjustable stroke width and font size
