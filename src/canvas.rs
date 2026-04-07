@@ -1,6 +1,7 @@
 use std::cell::RefCell;
 use std::rc::Rc;
 
+use cairo::{Context, Format, ImageSurface};
 use gtk4::prelude::*;
 use gtk4::{ApplicationWindow, Box as GtkBox, DrawingArea, Entry, GestureDrag, Orientation, Window};
 
@@ -92,6 +93,33 @@ pub fn build_canvas(
                 drop(st);
                 da_end.queue_draw();
             }
+            return;
+        }
+        if st.tool == ToolKind::Crop {
+            let mut new_size = None;
+            if let Some(current) = st.current.take() {
+                let bg_w = st.background.width();
+                let bg_h = st.background.height();
+                let x = (current.start.0.min(current.end.0).max(0.0) as i32).min(bg_w - 1);
+                let y = (current.start.1.min(current.end.1).max(0.0) as i32).min(bg_h - 1);
+                let w = ((current.end.0 - current.start.0).abs() as i32).min(bg_w - x);
+                let h = ((current.end.1 - current.start.1).abs() as i32).min(bg_h - y);
+                if w > 5 && h > 5 {
+                    let cropped = ImageSurface::create(Format::ARgb32, w, h).unwrap();
+                    let cr = Context::new(&cropped).unwrap();
+                    cr.set_source_surface(&st.background, -x as f64, -y as f64).unwrap();
+                    cr.paint().unwrap();
+                    drop(cr);
+                    st.background = cropped;
+                    st.annotations.clear();
+                    new_size = Some((w, h));
+                }
+            }
+            drop(st);
+            if let Some((w, h)) = new_size {
+                da_end.set_size_request(w, h);
+            }
+            da_end.queue_draw();
             return;
         }
         if let Some(ann) = st.current.take() {

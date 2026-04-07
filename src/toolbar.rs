@@ -48,10 +48,12 @@ pub fn build_toolbar(
     let btn_arrow = ToggleButton::with_label("Arrow");
     let btn_text = ToggleButton::with_label("Text");
     let btn_ocr = ToggleButton::with_label("OCR");
+    let btn_crop = ToggleButton::with_label("Crop");
     btn_line.set_group(Some(&btn_rect));
     btn_arrow.set_group(Some(&btn_rect));
     btn_text.set_group(Some(&btn_rect));
     btn_ocr.set_group(Some(&btn_rect));
+    btn_crop.set_group(Some(&btn_rect));
     btn_rect.set_active(true);
 
     let s = Rc::clone(&state);
@@ -84,12 +86,19 @@ pub fn build_toolbar(
             s.borrow_mut().tool = ToolKind::Ocr;
         }
     });
+    let s = Rc::clone(&state);
+    btn_crop.connect_toggled(move |btn| {
+        if btn.is_active() {
+            s.borrow_mut().tool = ToolKind::Crop;
+        }
+    });
 
     toolbar.append(&btn_rect);
     toolbar.append(&btn_line);
     toolbar.append(&btn_arrow);
     toolbar.append(&btn_text);
     toolbar.append(&btn_ocr);
+    toolbar.append(&btn_crop);
     toolbar.append(&Separator::new(Orientation::Vertical));
 
     // Color buttons

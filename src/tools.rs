@@ -7,6 +7,7 @@ pub enum ToolKind {
     Arrow,
     Text,
     Ocr,
+    Crop,
 }
 
 #[derive(Clone)]
@@ -64,8 +65,8 @@ pub fn draw_annotation(cr: &Context, ann: &Annotation) {
                 let _ = cr.show_text(text);
             }
         }
-        ToolKind::Ocr => {
-            // Draw a dashed selection rectangle for OCR region
+        ToolKind::Ocr | ToolKind::Crop => {
+            // Draw a dashed selection rectangle
             let x = ann.start.0.min(ann.end.0);
             let y = ann.start.1.min(ann.end.1);
             let w = (ann.end.0 - ann.start.0).abs();
