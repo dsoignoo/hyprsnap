@@ -69,6 +69,27 @@ Reload your config:
 hyprctl reload
 ```
 
+## Configuration
+
+After installing, you can customize the behavior by editing the wrapper scripts in `~/.local/bin/`.
+
+**Change the save directory** — edit `~/.local/bin/screenshot-edit`:
+
+```bash
+# Launch the annotation editor with a custom save directory
+"$HOME/.local/bin/hyprsnap" --save-dir "$HOME/Pictures/screenshots" "$SCREENSHOT_PATH"
+```
+
+By default, screenshots are saved next to the original temporary file. Adding `--save-dir` lets you save annotated screenshots to a permanent location like `~/Pictures/screenshots`.
+
+**Available options for hyprsnap:**
+
+| Option | Description |
+|---|---|
+| `--save-dir <dir>` | Directory where annotated screenshots are saved |
+
+> **Note:** `make install` will not overwrite your modified scripts — it prompts before replacing them.
+
 ## Disclaimer
 
 This is a bit hacky in some ways — it was vibe coded with [Claude](https://claude.ai) and gets the job done, but don't expect polish.

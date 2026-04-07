@@ -22,8 +22,21 @@ build:
 install: deps build
 	mkdir -p $(BINDIR)
 	cp target/release/hyprsnap $(BINDIR)/hyprsnap
-	cp screenshot-edit.sh $(BINDIR)/screenshot-edit
-	cp ocr-select.sh $(BINDIR)/ocr-select
+	@for script in screenshot-edit ocr-select; do \
+		src="$$script.sh"; \
+		dst="$(BINDIR)/$$script"; \
+		if [ -f "$$dst" ]; then \
+			if ! diff -q "$$src" "$$dst" >/dev/null 2>&1; then \
+				printf "$$dst already exists and has been modified. Overwrite? [y/N] "; \
+				read ans; \
+				case "$$ans" in [yY]*) cp "$$src" "$$dst" ;; *) echo "Skipping $$dst" ;; esac; \
+			else \
+				cp "$$src" "$$dst"; \
+			fi; \
+		else \
+			cp "$$src" "$$dst"; \
+		fi; \
+	done
 	chmod +x $(BINDIR)/screenshot-edit $(BINDIR)/ocr-select
 	@echo ""
 	@echo "Installed to $(BINDIR)."
